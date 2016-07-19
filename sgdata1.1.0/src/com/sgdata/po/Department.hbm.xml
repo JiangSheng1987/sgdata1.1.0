@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sgdata.po">
+	<class name="Department" table="tb_departments">
+		<id name="departID">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="departName" type="java.lang.String" not-null="true"></property>
+		<set name="students" inverse="true" cascade="persist" fetch="join">
+			<key column="departID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="Student"/>
+		</set>
+		<set name="teachers" inverse="true" cascade="persist" fetch="join">
+			<key column="departID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="Teacher"/>
+		</set>
+		<set name="classes" inverse="true" cascade="persist" fetch="join">
+			<key column="departID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="Class" />
+		</set>
+	</class>
+</hibernate-mapping>    

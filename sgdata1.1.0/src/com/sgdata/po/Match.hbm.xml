@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sgdata.po">
+	<class name="Match" table="tb_matchs">
+		<id name="matchID">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="matchName" type="java.lang.String" not-null="true"></property>
+		<property name="matchTime" type="java.util.Date" not-null="true"></property>
+		<property name="matchReward" type="java.lang.String" not-null="true"></property>
+		<set name="studentmatches" inverse="true" cascade="persist" fetch="join">
+			<key column="matchID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="StudentMatch"/>
+		</set>
+		<set name="teachermatches" inverse="true" cascade="persist" fetch="join">
+			<key column="matchID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="TeacherMatch"/>
+		</set>
+	</class>
+</hibernate-mapping>    

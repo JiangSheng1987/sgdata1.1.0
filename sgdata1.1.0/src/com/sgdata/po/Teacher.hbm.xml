@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sgdata.po">
+	<class name="Teacher" table="tb_teachers">
+		<id name="teaID" column="teaID" type="java.lang.String" length="11">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="teaName" type="java.lang.String" length="30" not-null="true"></property>
+		<property name="teaSex" type="java.lang.String" length="2" not-null="true"></property>
+		<property name="teaBirth" type="java.util.Date" not-null="true"></property>
+		<property name="teaTel" type="java.lang.String" length="20" not-null="true"></property>
+		<property name="teaEmail" type="java.lang.String" length="20" not-null="true"></property>
+		<property name="dept" type="java.lang.String" length="10" not-null="true"></property>
+		<property name="password" type="java.lang.String" length="10" not-null="true"></property>
+		<property name="isManager" type="java.lang.String" length="1" not-null="false"></property>
+		<set name="studentcourses" inverse="true" cascade="persist" fetch="join">
+			<key column="teaID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="StudentCourse"/>
+		</set>
+		<set name="teachercourses" inverse="true" cascade="persist" fetch="join">
+			<key column="teaID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="TeacherCourse"/>
+		</set>
+		<set name="studentmatches" inverse="true" cascade="persist" fetch="join">
+			<key column="teaID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="StudentMatch"/>
+		</set>
+		<set name="teachermatches" inverse="true" cascade="persist" fetch="join">
+			<key column="teaID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="TeacherMatch"/>
+		</set>
+		<many-to-one name="department" class="Department" column="departID"></many-to-one>
+	</class>
+</hibernate-mapping>    

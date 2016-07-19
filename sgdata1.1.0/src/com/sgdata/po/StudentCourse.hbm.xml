@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sgdata.po">
+	<class name="StudentCourse" table="tb_student_course">
+		<id name="id">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="score" type="int"></property>
+		<many-to-one name="student" class="Student" column="stuID"></many-to-one>
+		<many-to-one name="course" class="Course" column="courseID"></many-to-one>
+		<many-to-one name="teacher" class="Teacher" column="teaID"></many-to-one>
+	</class>
+</hibernate-mapping>    

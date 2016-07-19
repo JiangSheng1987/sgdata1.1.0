@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- Struts2框架配置文件 -->
+<struts>
+	<!-- 配置struts2可以受理的请求扩展名 -->
+	<constant name="struts.action.extension" value="action,do,"></constant>
+    <!-- struts2的package对应于项目的模块 -->
+    <package name="action" extends="struts-default" namespace="/">
+    	<!-- 配置action -->
+    	
+    	<!-- 登录验证的Action -->
+    	<action name="loginAction" class="loginCheckAction">
+    		<result name="success">/WEB-INF/page/admin/index.jsp</result>
+    		<result name="input">/WEB-INF/page/admin/login.jsp</result>
+    	</action>
+    	
+    	<!-- 
+			SSH项目WEB-INF下面的页面跳转要通过Servlet来实现，这样确实是麻烦了点，
+			不过安全性就提高上去了，因为放在WEB-INF下面的JSP页面，是不可以直接访问的
+	 	-->
+    	 <action name="indexAction">  
+    	      <result>/WEB-INF/page/admin/index.jsp</result>  
+    	 </action>  
+    	 <action name="gotoLoginAction">
+    	 	<result>/WEB-INF/page/admin/login.jsp</result>
+    	 </action>
+    	
+    	<!-- 学生信息管理的Action -->
+    	<action name="getAllStuInfoAction" class="studentAction" method="getAllInfo">
+    			<result name="success">/WEB-INF/page/admin/student/studentInfoManager.jsp</result>
+    	</action>
+    	<action name="updateStuInfoAction" class="studentAction" method="updateInfo">
+    		<result name="success" type="redirectAction">getAllStuInfoAction</result>
+    	</action>
+    	<action name="getStuInfoByIdAction" class="studentAction" method="getInfoById">
+    		<result name="success">/WEB-INF/page/admin/student/studentInfoDetail.jsp</result>
+    	</action>
+    	<action name="getLearnScoresAction" class="studentAction" method="getLearnScoreById">
+    		<result name="success">/WEB-INF/page/admin/student/studentLearnScores.jsp</result>
+    	</action>
+    	<action name="getMatchScoresAction" class="studentAction" method="getMatchScoreById">
+    		<result name="success">/WEB-INF/page/admin/student/studentMatchScores.jsp</result>
+    	</action>
+    	<action name="getInfoByIdAction" class="studentAction" method="getTheInfoById">
+    		<result name="success">/WEB-INF/page/admin/student/studentInfoManager.jsp</result>
+    	</action>
+    	
+    	
+    	<!-- 教师信息管理的Action -->
+    	<action name="getAllTeaInfoAction" class="teacherAction" method="getAllInfo">
+    			<result name="success">/WEB-INF/page/admin/teacher/teacherInfoManager.jsp</result>
+    	</action>
+    	<action name="getTeachingInfoAction" class="teacherAction" method="getTeachingInfoById">
+    			<result name="success">/WEB-INF/page/admin/teacher/teacherTeaching.jsp</result>
+    	</action>
+    	<action name="getMatchGuideInfoAction" class="teacherAction" method="getMatchGuideInfoById">
+    			<result name="success">/WEB-INF/page/admin/teacher/teacherMatchGuide.jsp</result>
+    	</action>
+    	<action name="getCourseStudentsInfoAction" class="teacherAction" method="getCourseStudentsInfoById">
+    			<result name="success">/WEB-INF/page/admin/teacher/teacherCourseStusInfo.jsp</result>
+    	</action>
+    	<action name="getMatchStudentsInfoAction" class="teacherAction" method="getMatchStudentsInfoById">
+    			<result name="success">/WEB-INF/page/admin/teacher/teacherMatchStusInfo.jsp</result>
+    	</action>
+    	<action name="getTeaInfoByIdAction" class="teacherAction" method="getTeaInfoById">
+    		<result name="success">/WEB-INF/page/admin/teacher/teacherInfoManager.jsp</result>
+    	</action>
+    	
+    	<!-- 课程管理的Action -->
+    	<action name="getAllCourseInfoAction" class="courseAction" method="getAllInfo">
+    		<result name="success">/WEB-INF/page/admin/course/courseManager.jsp</result>
+    	</action>
+    	<action name="getTeachersInfoAction" class="courseAction" method="getTeachersInfoById">
+    		<result name="success">/WEB-INF/page/admin/course/courseTeachersInfo.jsp</result>
+    	</action>
+    	<action name="newCourseAction">
+    		<result>/WEB-INF/page/admin/course/newCourse.jsp</result>
+    	</action>
+    	<action name="addCourseInfoAction" class="courseAction" method="addInfo">
+    		<result name="success" type="redirectAction">getAllCourseInfoAction</result>
+    	</action>
+    	
+    	<!-- 比赛信息管理的Action -->
+    	<action name="getAllMatchInfoAction" class="matchAction" method="getAllInfo">
+    		<result name="success">/WEB-INF/page/admin/match/matchInfoManager.jsp</result>
+    	</action>
+    	<action name="getStudentsInfoAction" class="matchAction" method="getStudentsInfoById">
+    		<result name="success">/WEB-INF/page/admin/match/matchStudentsInfo.jsp</result>
+    	</action>
+    	
+    
+    	
+    </package>
+    
+</struts>

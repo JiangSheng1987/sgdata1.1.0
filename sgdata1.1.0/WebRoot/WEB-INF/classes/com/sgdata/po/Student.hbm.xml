@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.sgdata.po">
+	<class name="Student" table="tb_students">
+		<id name="stuID" column="stuID" type="java.lang.String" length="11">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="stuName" type="java.lang.String" length="30" not-null="true"></property>
+		<property name="stuSex" type="java.lang.String" length="2" not-null="true"></property>
+		<property name="stuBirth" type="java.util.Date" not-null="true"></property>
+		<property name="stuTel" type="java.lang.String" length="20" not-null="true"></property>
+		<property name="stuEmail" type="java.lang.String" length="20" not-null="true"></property>
+		<property name="dept" type="java.lang.String" length="10" not-null="true"></property>
+		<property name="stuIDCard" type="java.lang.String" length="20" not-null="true"></property>
+		<property name="className" type="java.lang.String" length="20" not-null="true"></property>
+		<property name="password" type="java.lang.String" length="10" not-null="true"></property>
+		<set name="studentcourses" inverse="true" cascade="persist" fetch="join">
+			<key column="stuID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="StudentCourse"/>
+		</set>
+		<set name="studentmatches" inverse="true" cascade="persist" fetch="join">
+			<key column="stuID" not-null="true" foreign-key="true"></key>
+			<one-to-many class="StudentMatch"/>
+		</set>
+		<many-to-one name="department" class="Department" column="departID"></many-to-one>
+		<many-to-one name="mclass" class="Class" column="classID"></many-to-one>
+	</class>
+</hibernate-mapping>    
